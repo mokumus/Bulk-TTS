@@ -25,6 +25,7 @@ def save_tts(text, file_name, format='wav', language='ar', output_dir='output', 
     myobj = gTTS(text=text, lang=language, slow=False) 
     # Create a directory in current working directory
     if not os.path.exists(output_dir):
+        print(f"Generating: {output_dir}")
         os.makedirs(output_dir)
     myobj.save(f"{output_dir}/{file_name}.{format}")
 
