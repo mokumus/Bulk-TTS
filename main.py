@@ -9,7 +9,7 @@ words = []
 
 
 def get_keys_json(file_name):
-    with open(file_name,  encoding='utf-8') as f:
+    with open(file_name,  encoding='utf-8-sig') as f:
         data = json.load(f)
 
     for key in data.keys():
@@ -17,21 +17,19 @@ def get_keys_json(file_name):
 
     return words, data
 
-words, data = get_keys_json('eslestirme.json')
-# print(data[words[0]][0]['ar'])
+words, data = get_keys_json('output-muttaride.json')
 
 
 def save_tts(text, file_name, format='wav', language='ar', output_dir='output', ):
     myobj = gTTS(text=text, lang=language, slow=False) 
     # Create a directory in current working directory
     if not os.path.exists(output_dir):
-        print(f"Generating: {output_dir}")
         os.makedirs(output_dir)
     myobj.save(f"{output_dir}/{file_name}.{format}")
 
 
-
 for word in words:
+    print(f"Processing {word}")
     for i in range(len(data[word])):
-        save_tts(data[word][i]['ar'], file_name=str(i+1), output_dir=f"output/{word}")
+        save_tts(data[word][i]['ar'], file_name=str(i+1), output_dir=f"output-muttaride/{word}")
     
